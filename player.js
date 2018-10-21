@@ -59,7 +59,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
+if (true && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
     // Warn before navigating away
     window.onbeforeunload = function () {
         return true;

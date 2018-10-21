@@ -1,5 +1,5 @@
 var GUI =
-(window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[1],{
+(window["webpackJsonpGUI"] = window["webpackJsonpGUI"] || []).push([[3],{
 
 /***/ 1137:
 /***/ (function(module, exports, __webpack_require__) {
@@ -105,7 +105,7 @@ exports.default = function (appTarget) {
         visible: true,
         host: backpackHost
     };
-    if ("production" === 'production' && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
+    if (true && (typeof window === 'undefined' ? 'undefined' : _typeof(window)) === 'object') {
         // Warn before navigating away
         window.onbeforeunload = function () {
             return true;
