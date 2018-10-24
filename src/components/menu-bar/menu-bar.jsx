@@ -38,6 +38,9 @@ import {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
+    openRubyMenu,
+    closeRubyMenu,
+    rubyMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,
@@ -133,7 +136,8 @@ class MenuBar extends React.Component {
             'handleCloseFileMenuAndThen',
             'handleLanguageMouseUp',
             'handleRestoreOption',
-            'restoreOptionMessage'
+            'restoreOptionMessage',
+            'handleClickConvertRubyToBlocks'
         ]);
     }
     componentDidUpdate (prevProps) {
@@ -141,6 +145,7 @@ class MenuBar extends React.Component {
         if (this.props.isShowingProject && !prevProps.isShowingProject) {
             this.props.onRequestCloseFile();
             this.props.onRequestCloseEdit();
+            this.props.onRequestCloseRuby();
         }
     }
     handleClickNew () {
@@ -158,7 +163,7 @@ class MenuBar extends React.Component {
         return () => {
             restoreFun();
             this.props.onRequestCloseEdit();
-        };
+            };
     }
     handleCloseFileMenuAndThen (fn) {
         return () => {
@@ -199,6 +204,10 @@ class MenuBar extends React.Component {
             />);
         }
         }
+    }
+    handleClickConvertRubyToBlocks () {
+        this.props.onRequestCloseRuby();
+        this.props.onClickConvertRubyToBlocks && this.props.onClickConvertRubyToBlocks();
     }
     render () {
         const saveNowMessage = (
@@ -422,6 +431,36 @@ class MenuBar extends React.Component {
                                 </MenuSection>
                             </MenuBarMenu>
                         </div>
+                        <div
+                            className={classNames(styles.menuBarItem, styles.hoverable, {
+                                [styles.active]: this.props.rubyMenuOpen
+                            })}
+                            onMouseUp={this.props.onClickRuby}
+                        >
+                            <div className={classNames(styles.rubyMenu)}>
+                                <FormattedMessage
+                                    defaultMessage="Ruby"
+                                    description="Text for ruby dropdown menu"
+                                    id="gui.smalruby.menuBar.ruby"
+                                />
+                            </div>
+                            <MenuBarMenu
+                                className={classNames(styles.menuBarMenu)}
+                                open={this.props.rubyMenuOpen}
+                                place={this.props.isRtl ? 'left' : 'right'}
+                                onRequestClose={this.props.onRequestCloseRuby}
+                            >
+                                <MenuSection>
+                                    <MenuItem onClick={this.handleClickConvertRubyToBlocks}>
+                                        <FormattedMessage
+                                            defaultMessage="Ruby to blocks"
+                                            description="Convert ruby to blocks"
+                                            id="gui.smalruby3.menuBar.convertRubyToBlocks"
+                                        />
+                                    </MenuItem>
+                                </MenuSection>
+                            </MenuBarMenu>
+                        </div>
                     </div>
                     <Divider className={classNames(styles.divider)} />
                     <div
@@ -619,6 +658,7 @@ MenuBar.propTypes = {
     canShare: PropTypes.bool,
     className: PropTypes.string,
     editMenuOpen: PropTypes.bool,
+    rubyMenuOpen: PropTypes.bool,
     enableCommunity: PropTypes.bool,
     fileMenuOpen: PropTypes.bool,
     intl: intlShape,
@@ -629,16 +669,19 @@ MenuBar.propTypes = {
     loginMenuOpen: PropTypes.bool,
     onClickAccount: PropTypes.func,
     onClickEdit: PropTypes.func,
+    onClickRuby: PropTypes.func,
     onClickFile: PropTypes.func,
     onClickLanguage: PropTypes.func,
     onClickLogin: PropTypes.func,
     onClickNew: PropTypes.func,
     onClickSave: PropTypes.func,
+    onClickConvertRubyToBlocks: PropTypes.func,
     onLogOut: PropTypes.func,
     onOpenRegistration: PropTypes.func,
     onOpenTipLibrary: PropTypes.func,
     onRequestCloseAccount: PropTypes.func,
     onRequestCloseEdit: PropTypes.func,
+    onRequestCloseRuby: PropTypes.func,
     onRequestCloseFile: PropTypes.func,
     onRequestCloseLanguage: PropTypes.func,
     onRequestCloseLogin: PropTypes.func,
@@ -662,6 +705,7 @@ const mapStateToProps = state => {
         accountMenuOpen: accountMenuOpen(state),
         fileMenuOpen: fileMenuOpen(state),
         editMenuOpen: editMenuOpen(state),
+        rubyMenuOpen: rubyMenuOpen(state),
         isRtl: state.locales.isRtl,
         isUpdating: getIsUpdating(loadingState),
         isShowingProject: getIsShowingProject(loadingState),
@@ -680,6 +724,8 @@ const mapDispatchToProps = dispatch => ({
     onRequestCloseFile: () => dispatch(closeFileMenu()),
     onClickEdit: () => dispatch(openEditMenu()),
     onRequestCloseEdit: () => dispatch(closeEditMenu()),
+    onClickRuby: () => dispatch(openRubyMenu()),
+    onRequestCloseRuby: () => dispatch(closeRubyMenu()),
     onClickLanguage: () => dispatch(openLanguageMenu()),
     onRequestCloseLanguage: () => dispatch(closeLanguageMenu()),
     onClickLogin: () => dispatch(openLoginMenu()),

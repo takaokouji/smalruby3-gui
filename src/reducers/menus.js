@@ -4,6 +4,7 @@ const CLOSE_MENU = 'scratch-gui/menus/CLOSE_MENU';
 const MENU_ACCOUNT = 'accountMenu';
 const MENU_FILE = 'fileMenu';
 const MENU_EDIT = 'editMenu';
+const MENU_RUBY = 'rubyMenu';
 const MENU_LANGUAGE = 'languageMenu';
 const MENU_LOGIN = 'loginMenu';
 
@@ -12,6 +13,7 @@ const initialState = {
     [MENU_ACCOUNT]: false,
     [MENU_FILE]: false,
     [MENU_EDIT]: false,
+    [MENU_RUBY]: false,
     [MENU_LANGUAGE]: false,
     [MENU_LOGIN]: false
 };
@@ -48,6 +50,9 @@ const fileMenuOpen = state => state.scratchGui.menus[MENU_FILE];
 const openEditMenu = () => openMenu(MENU_EDIT);
 const closeEditMenu = () => closeMenu(MENU_EDIT);
 const editMenuOpen = state => state.scratchGui.menus[MENU_EDIT];
+const openRubyMenu = () => openMenu(MENU_RUBY);
+const closeRubyMenu = () => closeMenu(MENU_RUBY);
+const rubyMenuOpen = state => state.scratchGui.menus[MENU_RUBY];
 const openLanguageMenu = () => openMenu(MENU_LANGUAGE);
 const closeLanguageMenu = () => closeMenu(MENU_LANGUAGE);
 const languageMenuOpen = state => state.scratchGui.menus[MENU_LANGUAGE];
@@ -67,6 +72,9 @@ export {
     openEditMenu,
     closeEditMenu,
     editMenuOpen,
+    openRubyMenu,
+    closeRubyMenu,
+    rubyMenuOpen,
     openLanguageMenu,
     closeLanguageMenu,
     languageMenuOpen,

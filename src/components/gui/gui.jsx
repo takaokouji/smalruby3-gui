@@ -84,6 +84,7 @@ const GUIComponent = props => {
         onOpenRegistration,
         onToggleLoginOpen,
         onUpdateProjectTitle,
+        onClickConvertRubyToBlocks,
         onActivateCostumesTab,
         onActivateSoundsTab,
         onActivateRubyTab,
@@ -186,6 +187,7 @@ const GUIComponent = props => {
                     onShare={onShare}
                     onToggleLoginOpen={onToggleLoginOpen}
                     onUpdateProjectTitle={onUpdateProjectTitle}
+                    onClickConvertRubyToBlocks={onClickConvertRubyToBlocks}
                 />
                 <Box className={styles.bodyWrapper}>
                     <Box className={styles.flexWrapper}>
@@ -367,6 +369,7 @@ GUIComponent.propTypes = {
     onTabSelect: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     onUpdateProjectTitle: PropTypes.func,
+    onClickConvertRubyToBlocks: PropTypes.func,
     renderLogin: PropTypes.func,
     rubyCode: PropTypes.string,
     rubyTabVisible: PropTypes.bool,
@@ -388,6 +391,9 @@ GUIComponent.defaultProps = {
     canSaveAsCopy: false,
     canShare: false,
     onUpdateProjectTitle: () => {},
+    onClickConvertRubyToBlocks: () => {
+        console.log('onClickConvertRubyToBlocks');
+    },
     stageSizeMode: STAGE_SIZE_MODES.large
 };
 
